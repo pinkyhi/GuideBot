@@ -7,6 +7,6 @@ namespace GuideBot.DAL.Entities
 {
     public class Image : BaseEntity
     {
-        public int Key  {set; get; }
+        public string Key  { get; set; }
     }
 }

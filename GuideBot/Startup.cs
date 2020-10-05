@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GuideBot.DAL.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +27,7 @@ namespace GuideBot
         // Порядок не важен
         public void ConfigureServices(IServiceCollection services)
         {
+            this.InstallDataAccess(services);
             services.AddControllers();
         }
 
@@ -44,6 +47,15 @@ namespace GuideBot
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void InstallDataAccess(IServiceCollection services)
+        {
+            string connection = this.Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AppDbContext>(options => {
+                options.UseSqlServer(connection);
+            });
+            // services.AddScoped<IRepository, Repository>();
         }
     }
 }
