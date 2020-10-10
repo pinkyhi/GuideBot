@@ -71,7 +71,7 @@ namespace GuideBot.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Image");
+                    b.ToTable("Imgs");
                 });
 
             modelBuilder.Entity("GuideBot.DAL.Entities.Page", b =>
@@ -110,7 +110,7 @@ namespace GuideBot.DAL.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("PageImage");
+                    b.ToTable("PageImages");
                 });
 
             modelBuilder.Entity("GuideBot.DAL.Entities.GuidePage", b =>
@@ -131,7 +131,7 @@ namespace GuideBot.DAL.Migrations
             modelBuilder.Entity("GuideBot.DAL.Entities.PageImage", b =>
                 {
                     b.HasOne("GuideBot.DAL.Entities.Image", "Image")
-                        .WithMany("ImagePages")
+                        .WithMany("PageImages")
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

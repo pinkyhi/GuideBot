@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuideBot.DAL.Contexts;
+using GuideBot.DAL.Interfaces;
+using GuideBot.DAL.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -55,7 +57,7 @@ namespace GuideBot
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlServer(connection);
             });
-            // services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IRepository, Repository>();
         }
     }
 }

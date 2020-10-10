@@ -9,6 +9,6 @@ namespace GuideBot.DAL.Entities
     {
         public string Key  { get; set; }
 
-        public IEnumerable<PageImage> ImagePages { get; set; }
+        public IEnumerable<PageImage> PageImages { get; set; }
     }
 }

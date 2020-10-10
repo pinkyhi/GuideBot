@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuideBot.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20201010102515_FullDB")]
-    partial class FullDB
+    [Migration("20201010130010_InitMigration")]
+    partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,7 +73,7 @@ namespace GuideBot.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Image");
+                    b.ToTable("Imgs");
                 });
 
             modelBuilder.Entity("GuideBot.DAL.Entities.Page", b =>
@@ -112,7 +112,7 @@ namespace GuideBot.DAL.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.ToTable("PageImage");
+                    b.ToTable("PageImages");
                 });
 
             modelBuilder.Entity("GuideBot.DAL.Entities.GuidePage", b =>
@@ -133,7 +133,7 @@ namespace GuideBot.DAL.Migrations
             modelBuilder.Entity("GuideBot.DAL.Entities.PageImage", b =>
                 {
                     b.HasOne("GuideBot.DAL.Entities.Image", "Image")
-                        .WithMany("ImagePages")
+                        .WithMany("PageImages")
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

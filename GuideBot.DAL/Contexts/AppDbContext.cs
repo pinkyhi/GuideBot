@@ -14,6 +14,10 @@ namespace GuideBot.DAL.Contexts
 
         public DbSet<GuidePage> GuidePages { get; set; }
 
+        public DbSet<PageImage> PageImages { get; set; }
+
+        public DbSet<Image> Imgs { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
@@ -38,7 +42,7 @@ namespace GuideBot.DAL.Contexts
             modelBuilder.Entity<PageImage>()
                 .HasKey(gp => new { gp.PageId, gp.ImageId });
             modelBuilder.Entity<Image>()
-                .HasMany(g => g.ImagePages)
+                .HasMany(g => g.PageImages)
                 .WithOne(gp => gp.Image)
                 .HasForeignKey(gp => gp.ImageId)
                 .OnDelete(DeleteBehavior.Cascade);
