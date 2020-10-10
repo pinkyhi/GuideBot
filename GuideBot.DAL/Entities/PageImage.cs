@@ -7,8 +7,14 @@ namespace GuideBot.DAL.Entities
 {
     public class PageImage : BaseEntity
     {
+        public int PageId { get; set; }
+
+        public int ImageId { get; set; }
+
         public int Position { get; set;  }
 
-        public string Image { get; set; }
+        public Image Image { get; set; }
+
+        public Page Page { get; set; }
     }
 }

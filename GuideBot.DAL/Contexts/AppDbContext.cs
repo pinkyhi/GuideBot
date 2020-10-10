@@ -34,6 +34,19 @@ namespace GuideBot.DAL.Contexts
                 .WithOne(gp => gp.Page)
                 .HasForeignKey(gp => gp.PageId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PageImage>()
+                .HasKey(gp => new { gp.PageId, gp.ImageId });
+            modelBuilder.Entity<Image>()
+                .HasMany(g => g.ImagePages)
+                .WithOne(gp => gp.Image)
+                .HasForeignKey(gp => gp.ImageId)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Page>()
+                .HasMany(p => p.PageImages)
+                .WithOne(gp => gp.Page)
+                .HasForeignKey(gp => gp.PageId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

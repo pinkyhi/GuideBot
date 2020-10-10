@@ -8,5 +8,7 @@ namespace GuideBot.DAL.Entities
     public class Image : BaseEntity
     {
         public string Key  { get; set; }
+
+        public IEnumerable<PageImage> ImagePages { get; set; }
     }
 }

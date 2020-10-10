@@ -14,5 +14,7 @@ namespace GuideBot.DAL.Entities
         public int ParseMode { get; set; }
 
         public IEnumerable<GuidePage> GuidePages { get; set; }
+
+        public IEnumerable<PageImage> PageImages { get; set; }
     }
 }
