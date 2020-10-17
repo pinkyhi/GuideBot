@@ -7,6 +7,7 @@ using GuideBot.Core.Options;
 using GuideBot.DAL.Contexts;
 using GuideBot.DAL.Interfaces;
 using GuideBot.DAL.Repositories;
+using GuideBot.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,7 @@ namespace GuideBot
         {
             this.InstallDataAccess(services);
             this.InstallBot(services);
+            this.InstallFilters(services);
             services.AddControllers().AddNewtonsoftJson();
         }
 
@@ -71,6 +73,11 @@ namespace GuideBot
             this.Configuration.GetSection("GuideBot").Bind(guideBotOptions);
             services.AddSingleton(guideBotOptions);
             services.AddSingleton<GuideBotClient>();
+        }
+
+        private void InstallFilters(IServiceCollection services)
+        {
+            services.AddScoped<GuideBotExceptionFilterAttribute>();
         }
     }
 }
