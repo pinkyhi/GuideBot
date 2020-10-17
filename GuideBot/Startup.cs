@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GuideBot.BL.Bots;
+using GuideBot.Core.Options;
 using GuideBot.DAL.Contexts;
 using GuideBot.DAL.Interfaces;
 using GuideBot.DAL.Repositories;
@@ -30,7 +32,8 @@ namespace GuideBot
         public void ConfigureServices(IServiceCollection services)
         {
             this.InstallDataAccess(services);
-            services.AddControllers();
+            this.InstallBot(services);
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // Порядок важен
@@ -49,6 +52,8 @@ namespace GuideBot
             {
                 endpoints.MapControllers();
             });
+
+            app.ApplicationServices.GetService<GuideBotClient>();
         }
 
         private void InstallDataAccess(IServiceCollection services)
@@ -58,6 +63,14 @@ namespace GuideBot
                 options.UseSqlServer(connection);
             });
             services.AddScoped<IRepository, Repository>();
+        }
+
+        private void InstallBot(IServiceCollection services)
+        {
+            GuideBotOptions guideBotOptions = new GuideBotOptions();
+            this.Configuration.GetSection("GuideBot").Bind(guideBotOptions);
+            services.AddSingleton(guideBotOptions);
+            services.AddSingleton<GuideBotClient>();
         }
     }
 }

@@ -56,6 +56,7 @@ namespace GuideBot.DAL.Repositories
             this.dbContext.Set<T>().Update(exemplar);
             this.dbContext.SaveChanges();
         }
+
         public async Task<IEnumerable<T>> GetByFilterAsync<T>(Func<T, bool> predicate, params Expression<Func<T, object>>[] includeProperties) where T : BaseDto
         {
             var query = await Include(includeProperties).ToListAsync();
@@ -81,16 +82,16 @@ namespace GuideBot.DAL.Repositories
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteByFilterAsync<T>(Func<T, bool> predicate, params Expression<Func<T, object>>[] includeProperties) where T : BaseDto
+        public Task DeleteByFilterAsync<T>(Func<T, bool> predicate, params Expression<Func<T, object>>[] includeProperties) where T : BaseDto
         {
             this.dbContext.Set<T>().RemoveRange(this.GetByFilter<T>(predicate, includeProperties));
-            await this.dbContext.SaveChangesAsync();
+            return this.dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateExemplarAsync<T>(T exemplar) where T : BaseDto
+        public Task UpdateExemplarAsync<T>(T exemplar) where T : BaseDto
         {
             this.dbContext.Set<T>().Update(exemplar);
-            await this.dbContext.SaveChangesAsync();
+            return this.dbContext.SaveChangesAsync();
         }
 
         private IQueryable<T> Include<T>(params Expression<Func<T, object>>[] includeProperties) where T : BaseDto
