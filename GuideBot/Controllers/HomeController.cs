@@ -39,25 +39,7 @@ namespace GuideBot.Controllers
             else if (update.Type == Telegram.Bot.Types.Enums.UpdateType.CallbackQuery)
             {
             }
-            return Ok();
-            if (message.Text == "/ibuttons")
-            {
-                var keyboard = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup(
-                                        new Telegram.Bot.Types.InlineKeyboardButton[][]
-                                        {
-                                                            
-                                                            new [] {
-                                                                
-                                                                new Telegram.Bot.Types.InlineKeyboardButton("раз","callback1"),
-
-                                                               
-                                                                new Telegram.Bot.Types.InlineKeyboardButton("два","callback2"),
-                                                            },
-                                        }
-                                    );
-
-                await GuideBotClient.SendTextMessageAsync(message.Chat.Id, "Давай прибухнем!", false, false, 0, keyboard, Telegram.Bot.Types.Enums.ParseMode.Default);
-            }
+            
         }
     }
 }
