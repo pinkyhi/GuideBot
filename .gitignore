@@ -4,13 +4,12 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
-#C:\Users\dimas\source\repos\GuideBot\GuideBot\appsettings.json
 *.rsuser
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
-appsettings.json
+/appsetings.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -92,7 +91,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-*.json
+
 
 # Chutzpah Test files
 _Chutzpah*
